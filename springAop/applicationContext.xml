@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	
+	<bean id="before" class="com.icss.oa.methodBeforeAd.BeforeAdvice"></bean>
+	
+	<bean id="realSubject" class="com.icss.oa.methodBeforeAd.RealSubject"/>
+	
+	<bean id="after" class="com.icss.oa.methodBeforeAd.AfterAdvice"></bean>
+	
+	<bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>com.icss.oa.methodBeforeAd.Subject</value>
+		</property>
+		<property name="target">
+			<ref bean="realSubject"/>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>before</value>
+				<value>after</value>
+			</list>
+		</property>	
+		
+	</bean>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<bean id="realSubject1" class="com.icss.oa.methodBeforeAdv.RealSubject"></bean>
+	<bean id="before1" class="com.icss.oa.methodBeforeAdv.BeforeAdv"></bean>
+
+	<bean id="proxy1" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>com.icss.oa.methodBeforeAdv.Subject</value>
+		</property>
+		<property name="target">
+			<ref bean="realSubject1"/>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>before1</value>
+			</list>
+		</property>
+	</bean>
+
+
+	
+	
+	
+	
+	
+
+</beans>
